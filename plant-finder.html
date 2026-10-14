@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Houseplant Finder &amp; Care Tools — Fernly</title>
+  <meta name="description" content="Filter 28+ houseplant species by light, space, and pet-safety. Build custom watering schedules and troubleshoot yellowing leaves with Fernly's care tools.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23183c2e' d='M16 2C9 6 4 13 4 22c0 4 3 8 8 8 2 0 4-1 4-1s2 1 4 1c5 0 8-4 8-8 0-9-5-16-12-20z'/%3E%3Cpath fill='%233b664f' d='M16 4v24c-3-2-7-6-7-12 0-5 3-10 7-12z'/%3E%3C/svg%3E">
+
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/premium.css">
+
+  <!-- JSON-LD Placeholder for Plant Finder ItemList (Populated dynamically by finder.js) -->
+  <script type="application/ld+json" id="json-ld-itemlist">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Fernly Houseplant Catalog",
+    "itemListElement": []
+  }
+  </script>
+</head>
+<body>
+  <!-- Skip link for WCAG Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- SITE HEADER / NAVBAR (Identical on all 4 pages) -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a href="index.html" class="brand-logo" aria-label="Fernly Home">
+        <i class="ph ph-plant" aria-hidden="true"></i>
+        <span>Fernly</span>
+        <span class="brand-badge">Guide</span>
+      </a>
+
+      <!-- Desktop Nav (>1024px) -->
+      <nav class="nav-menu" role="navigation" aria-label="Main Navigation">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About</a>
+        </li>
+        <li class="nav-item">
+          <a href="services.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+            Services <i class="ph ph-caret-down" style="font-size: 0.8rem;" aria-hidden="true"></i>
+          </a>
+          <ul class="nav-dropdown" role="menu">
+            <li role="none">
+              <a href="services.html#finder-overview" class="dropdown-link" role="menuitem">
+                <i class="ph ph-magnifying-glass" aria-hidden="true"></i> Plant Finder Tool
+              </a>
+            </li>
+            <li role="none">
+              <a href="services.html#watering" class="dropdown-link" role="menuitem">
+                <i class="ph ph-drop" aria-hidden="true"></i> Watering Schedule
+              </a>
+            </li>
+            <li role="none">
+              <a href="services.html#workshops" class="dropdown-link" role="menuitem">
+                <i class="ph ph-users-three" aria-hidden="true"></i> Care Workshops
+              </a>
+            </li>
+            <li role="none">
+              <a href="services.html#troubleshooting" class="dropdown-link" role="menuitem">
+                <i class="ph ph-first-aid-kit" aria-hidden="true"></i> Troubleshooting Help
+              </a>
+            </li>
+            <li role="none">
+              <a href="contact.html" class="dropdown-link" role="menuitem">
+                <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Contact
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="plant-finder.html" class="nav-link active" aria-current="page">Plant Finder</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">Contact</a>
+        </li>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <button class="my-plants-btn" type="button" aria-label="Open saved plant collection">
+          <i class="ph ph-heart" aria-hidden="true"></i>
+          <span>My Plants</span>
+          <span class="my-plants-badge" aria-label="0 plants saved">0</span>
+        </button>
+
+        <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Open mobile navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE SLIDE-OVER DRAWER (<=1024px) -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" aria-hidden="true"></div>
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="brand-logo">
+        <i class="ph ph-plant" aria-hidden="true"></i>
+        <span>Fernly</span>
+      </div>
+      <button class="drawer-close-btn" id="drawer-close-btn" type="button" aria-label="Close navigation menu">
+        <i class="ph ph-x" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <ul class="drawer-menu">
+      <li>
+        <a href="index.html" class="drawer-link">Home</a>
+      </li>
+      <li>
+        <a href="about.html" class="drawer-link">About</a>
+      </li>
+      <li>
+        <button class="drawer-accordion-btn" id="drawer-services-accordion" type="button" aria-expanded="false">
+          <span>Services</span>
+          <i class="ph ph-caret-down accordion-icon" aria-hidden="true"></i>
+        </button>
+        <div class="drawer-accordion-content" id="drawer-services-content">
+          <a href="services.html#finder-overview" class="drawer-sublink">
+            <i class="ph ph-magnifying-glass" aria-hidden="true"></i> Plant Finder Tool
+          </a>
+          <a href="services.html#watering" class="drawer-sublink">
+            <i class="ph ph-drop" aria-hidden="true"></i> Watering Schedule
+          </a>
+          <a href="services.html#workshops" class="drawer-sublink">
+            <i class="ph ph-users-three" aria-hidden="true"></i> Care Workshops
+          </a>
+          <a href="services.html#troubleshooting" class="drawer-sublink">
+            <i class="ph ph-first-aid-kit" aria-hidden="true"></i> Troubleshooting Help
+          </a>
+          <a href="contact.html" class="drawer-sublink">
+            <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Contact
+          </a>
+        </div>
+      </li>
+      <li>
+        <a href="plant-finder.html" class="drawer-link active" aria-current="page">Plant Finder</a>
+      </li>
+      <li>
+        <a href="contact.html" class="drawer-link">Contact</a>
+      </li>
+    </ul>
+
+    <div style="margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+      <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='#finder';">
+        <i class="ph ph-magnifying-glass"></i> Jump to Finder
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN TOOL CONTENT -->
+  <main id="main-content">
+    <!-- PAGE TITLE HEADER & QUICK TOOL NAVIGATION -->
+    <section class="section page-hero" style="padding-bottom: 2rem;" aria-labelledby="finder-main-heading">
+        <svg class="floating-leaf leaf-1" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M50 5 C75 25, 95 55, 75 90 C55 80, 45 60, 50 5 Z" fill="#3b664f" fill-opacity="0.2" />
+          <path d="M50 5 Q60 50 75 90" stroke="#3b664f" stroke-width="1.5" stroke-opacity="0.3" fill="none" />
+        </svg>
+        <svg class="floating-leaf leaf-2" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M20 80 C20 40, 50 10, 80 20 C70 50, 50 80, 20 80 Z" fill="#c46944" fill-opacity="0.15" />
+          <path d="M20 80 Q50 50 80 20" stroke="#c46944" stroke-width="1.5" stroke-opacity="0.25" fill="none" />
+        </svg>
+        <svg class="floating-leaf leaf-3" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M30 10 C60 15, 85 45, 70 85 C40 75, 20 50, 30 10 Z" fill="#183c2e" fill-opacity="0.18" />
+        </svg>
+        <svg class="floating-leaf leaf-4" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+      <div class="container">
+        <header class="section-header" style="margin-bottom: 1.5rem;">
+          <span class="badge-label">Interactive Tool Suite</span>
+          <h1 id="finder-main-heading">Botanical Plant Finder, Care Cards &amp; Diagnostic Tools</h1>
+          <p>
+            Filter 28 curated species by natural light, vertical space, pet safety, and care level. Calculate custom watering schedules and troubleshoot leaf symptoms in one integrated workbench.
+          </p>
+        </header>
+
+        <!-- Quick Jump Anchor Bar -->
+        <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="#finder" class="btn btn-secondary btn-sm">
+            <i class="ph ph-magnifying-glass"></i> 1. Plant Finder
+          </a>
+          <a href="#watering-builder" class="btn btn-secondary btn-sm">
+            <i class="ph ph-drop"></i> 2. Watering Schedule Builder
+          </a>
+          <a href="#troubleshooter" class="btn btn-secondary btn-sm">
+            <i class="ph ph-first-aid-kit"></i> 3. Symptom Troubleshooter
+          </a>
+          <a href="#my-plants-section" class="btn btn-secondary btn-sm">
+            <i class="ph ph-heart"></i> 4. My Saved Plants
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: PLANT FINDER ENGINE (#finder) -->
+    <section class="section section-alt" id="finder" aria-labelledby="finder-tool-heading">
+      <div class="container">
+        <header class="section-header" style="margin-bottom: 2rem;">
+          <span class="badge-label">Search &amp; Filter</span>
+          <h2 id="finder-tool-heading">The Houseplant Finder Engine</h2>
+          <p>
+            Adjust filters to find species matching your exact room conditions. Click "Care Card" for comprehensive soil and propagation specifications.
+          </p>
+        </header>
+
+        <!-- Controls Card: Search + Multi-parameter Selectors -->
+        <div class="finder-controls-card">
+          <!-- Text Search Input -->
+          <div class="search-input-wrapper">
+            <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+            <input type="text" id="finder-search" class="search-input" placeholder="Search by common name, botanical name, or alias (e.g., Monstera, Pothos, Sansevieria)..." aria-label="Search houseplants by name">
+          </div>
+
+          <!-- Multi-parameter Filters Grid -->
+          <div class="filters-grid">
+            <!-- Light Filter -->
+            <div class="filter-group">
+              <label for="filter-light">Light Level</label>
+              <select id="filter-light" class="filter-select">
+                <option value="all">All Light Levels</option>
+                <option value="low">Low Light (Shade)</option>
+                <option value="medium">Medium Indirect</option>
+                <option value="bright">Bright Indirect</option>
+                <option value="direct">Direct Sunlight</option>
+              </select>
+            </div>
+
+            <!-- Space / Location Filter -->
+            <div class="filter-group">
+              <label for="filter-space">Container Space</label>
+              <select id="filter-space" class="filter-select">
+                <option value="all">All Placement Types</option>
+                <option value="desk or shelf">Desk or Shelf</option>
+                <option value="tabletop">Tabletop</option>
+                <option value="floor">Floor Stand</option>
+                <option value="hanging">Hanging Basket</option>
+              </select>
+            </div>
+
+            <!-- Difficulty Filter -->
+            <div class="filter-group">
+              <label for="filter-difficulty">Care Difficulty</label>
+              <select id="filter-difficulty" class="filter-select">
+                <option value="all">All Difficulty Levels</option>
+                <option value="beginner">Beginner (Forgiving)</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="expert">Expert (High Humidity)</option>
+              </select>
+            </div>
+
+            <!-- Mature Size Filter -->
+            <div class="filter-group">
+              <label for="filter-size">Mature Size</label>
+              <select id="filter-size" class="filter-select">
+                <option value="all">All Sizes</option>
+                <option value="small">Small (&lt; 1.5 ft)</option>
+                <option value="medium">Medium (2–4 ft)</option>
+                <option value="large">Large (5+ ft)</option>
+              </select>
+            </div>
+
+            <!-- Sort By -->
+            <div class="filter-group">
+              <label for="finder-sort">Sort Results</label>
+              <select id="finder-sort" class="filter-select">
+                <option value="name-asc">Name (A &rarr; Z)</option>
+                <option value="name-desc">Name (Z &rarr; A)</option>
+                <option value="diff-asc">Difficulty (Easiest First)</option>
+                <option value="size-asc">Size (Compact First)</option>
+              </select>
+            </div>
+
+            <!-- Pet-Safety Checkbox Toggle -->
+            <div class="filter-group" style="justify-content: flex-end;">
+              <label class="filter-pet-safe-toggle">
+                <input type="checkbox" id="filter-pet-safe">
+                <span><i class="ph ph-paw-print" style="color: var(--color-secondary);"></i> Pet-Safe Only</span>
+              </label>
+            </div>
+
+            <!-- Reset Button -->
+            <div class="filter-group" style="justify-content: flex-end;">
+              <button type="button" id="filter-reset-btn" class="btn btn-secondary btn-sm" style="height: 40px;">
+                <i class="ph ph-arrows-counter-clockwise"></i> Reset Filters
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Status Bar: Results Counter & Active Filter Tags -->
+        <div class="finder-status-bar">
+          <div class="finder-results-count" id="finder-results-count" role="status" aria-live="polite">
+            Showing 28 of 28 plants
+          </div>
+          <div class="active-filter-tags" id="active-filters-tags"></div>
+        </div>
+
+        <!-- Plant Cards Grid (Populated dynamically by finder.js) -->
+        <div class="cards-grid-4" id="finder-plants-grid"></div>
+
+        <!-- "No Results" Empty State -->
+        <div class="empty-state" id="finder-empty-state">
+          <i class="ph ph-plant" aria-hidden="true"></i>
+          <h3>No matching plants found</h3>
+          <p>Try adjusting your search criteria or toggling off the pet-safety filter to see more species.</p>
+          <button type="button" class="btn btn-primary" onclick="window.FernlyFinder && window.FernlyFinder.resetFilters()">
+            <i class="ph ph-arrows-counter-clockwise"></i> Reset All Filters
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: WATERING SCHEDULE BUILDER (#watering-builder) -->
+    <section class="section" id="watering-builder" aria-labelledby="schedule-heading">
+      <div class="container">
+        <header class="section-header">
+          <span class="badge-label">Moisture Physics</span>
+          <h2 id="schedule-heading">Watering Schedule Calculator</h2>
+          <p>
+            Choose a plant and configure your pot material, container size, ambient humidity, and season to calculate a customized watering interval.
+          </p>
+        </header>
+
+        <div class="schedule-builder-card">
+          <div class="schedule-grid-layout">
+            <!-- Left Column: Inputs -->
+            <div class="builder-inputs-col">
+              <h3><i class="ph ph-sliders"></i> Environment Parameters</h3>
+
+              <div class="form-group">
+                <label for="schedule-plant-picker" class="form-label">
+                  Select Houseplant Species <span class="req">*</span>
+                </label>
+                <select id="schedule-plant-picker" class="form-select"></select>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="schedule-pot-material" class="form-label">Pot Material</label>
+                  <select id="schedule-pot-material" class="form-select">
+                    <option value="terracotta">Unglazed Terracotta (Porous, fast drying)</option>
+                    <option value="plastic">Nursery Plastic (Standard baseline)</option>
+                    <option value="ceramic">Glazed Ceramic (Locks moisture in)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="schedule-pot-size" class="form-label">Container Diameter</label>
+                  <select id="schedule-pot-size" class="form-select">
+                    <option value="small">Small (4–6 in / dries fast)</option>
+                    <option value="medium" selected>Medium (7–10 in / baseline)</option>
+                    <option value="large">Large (11–16 in / deep reservoir)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="schedule-light" class="form-label">Room Light Exposure</label>
+                  <select id="schedule-light" class="form-select">
+                    <option value="low">Low Light (Slower consumption)</option>
+                    <option value="medium">Medium Diffused Daylight</option>
+                    <option value="bright" selected>Bright Indirect Light</option>
+                    <option value="direct">Direct Sunlight (Rapid evaporation)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="schedule-humidity" class="form-label">Room Humidity</label>
+                  <select id="schedule-humidity" class="form-select">
+                    <option value="dry">Dry Air (&lt;35% RH / Heaters)</option>
+                    <option value="average" selected>Average (40–50% RH)</option>
+                    <option value="humid">High Humidity (60%+ / Bathroom)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="schedule-season" class="form-label">Current Season</label>
+                <select id="schedule-season" class="form-select">
+                  <option value="spring" selected>Spring (Active vegetative awakening)</option>
+                  <option value="summer">Summer (Peak growth &amp; transpiration)</option>
+                  <option value="autumn">Autumn (Daylight decline &amp; slowing)</option>
+                  <option value="winter">Winter (Semi-dormancy &amp; reduced uptake)</option>
+                </select>
+              </div>
+
+              <div class="schedule-soil-tip">
+                <strong><i class="ph ph-hand-pointing"></i> Always Check Soil First (Finger Test):</strong>
+                A schedule is a guide, not a guarantee. Before watering, insert your index finger 2 inches into the potting soil or use a wooden skewer. If soil clings damply, postpone watering by 2–3 days.
+              </div>
+            </div>
+
+            <!-- Right Column: Results, Multiplier Breakdown & Calendar -->
+            <div class="builder-results-col">
+              <div class="schedule-output-box">
+                <span class="badge-label" id="schedule-plant-name">Monstera Deliciosa</span>
+                <div class="schedule-interval-display" id="schedule-interval-output">Every 9 Days</div>
+                <p id="schedule-interval-sub" style="font-size: 0.9rem; color: var(--color-primary); margin: 0;">
+                  General rule: check top soil at day 7 before pouring.
+                </p>
+                <div class="schedule-actions-row" style="justify-content: center;">
+                  <button type="button" class="btn btn-primary btn-sm" id="schedule-download-ics">
+                    <i class="ph ph-calendar-plus"></i> Download .ics Reminder
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="schedule-print-btn">
+                    <i class="ph ph-printer"></i> Print Schedule
+                  </button>
+                </div>
+              </div>
+
+              <!-- 14-Day Calendar Preview -->
+              <div class="calendar-preview-box">
+                <h4>
+                  <span><i class="ph ph-calendar-blank"></i> Next 14 Days Watering Preview</span>
+                  <small style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: normal;">(Starting Today)</small>
+                </h4>
+                <div class="calendar-days-grid" id="schedule-calendar-grid"></div>
+              </div>
+
+              <!-- Factors Multiplier Table -->
+              <div class="factors-table-card">
+                <h4><i class="ph ph-table"></i> Transparent Rule-of-Thumb Multipliers</h4>
+                <table class="factors-table" aria-label="Watering adjustment factors table">
+                  <thead>
+                    <tr>
+                      <th>Factor</th>
+                      <th>Multiplier</th>
+                      <th>Biological Rationale</th>
+                    </tr>
+                  </thead>
+                  <tbody id="schedule-factors-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: COMMON-PROBLEMS TROUBLESHOOTER (#troubleshooter) -->
+    <section class="section section-alt" id="troubleshooter" aria-labelledby="troubleshooter-heading">
+      <div class="container">
+        <header class="section-header">
+          <span class="badge-label">Diagnostic Clinic</span>
+          <h2 id="troubleshooter-heading">Common-Problems Troubleshooter</h2>
+          <p>
+            Select a leaf or stem symptom to start the diagnostic flow. Answers are calibrated against indoor plant pathology and phrased as likely causes.
+          </p>
+        </header>
+
+        <div class="troubleshooter-card">
+          <!-- Step 1: Optional Plant Picker -->
+          <div style="max-width: 500px; margin: 0 auto 2rem auto;">
+            <label for="troubleshoot-plant-select" class="form-label" style="text-align: center; display: block;">
+              Step 1: Choose Plant Species (Optional)
+            </label>
+            <select id="troubleshoot-plant-select" class="form-select"></select>
+          </div>
+
+          <!-- Step 2: Symptom Selector Buttons -->
+          <div style="text-align: center; margin-bottom: 0.85rem;">
+            <label class="form-label" style="font-size: 1rem; color: var(--color-primary);">
+              Step 2: What is the Primary Symptom?
+            </label>
+          </div>
+          <div class="symptom-picker-grid" id="symptom-buttons-grid"></div>
+
+          <!-- Step 3: Guided Follow-Up Questions (Revealed when symptom chosen) -->
+          <div id="troubleshoot-questions-box" style="display: none; background: var(--color-surface-soft); padding: 1.75rem; border-radius: var(--radius-inner); margin-top: 1.5rem; border: 1px solid var(--color-border);">
+            <h4 style="font-size: 1.1rem; color: var(--color-primary); margin-bottom: 1rem;">
+              <i class="ph ph-sliders"></i> Step 3: Quick Environmental Verification
+            </h4>
+
+            <div class="cards-grid-3">
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.4rem; color: var(--color-primary);">
+                  Soil Moisture at Root Zone:
+                </label>
+                <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.88rem;">
+                  <label><input type="radio" name="q-soil" value="wet" checked> Soggy / Wet to touch</label>
+                  <label><input type="radio" name="q-soil" value="damp"> Lightly damp</label>
+                  <label><input type="radio" name="q-soil" value="dry"> Bone-dry / Pulled from rim</label>
+                </div>
+              </div>
+
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.4rem; color: var(--color-primary);">
+                  Current Light Exposure:
+                </label>
+                <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.88rem;">
+                  <label><input type="radio" name="q-light" value="dim"> Dim / Away from window</label>
+                  <label><input type="radio" name="q-light" value="diffused" checked> Filtered indirect daylight</label>
+                  <label><input type="radio" name="q-light" value="direct"> Hot direct afternoon sun</label>
+                </div>
+              </div>
+
+              <div>
+                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.4rem; color: var(--color-primary);">
+                  Recent Changes (Past 3 Weeks):
+                </label>
+                <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.88rem;">
+                  <label><input type="radio" name="q-recent" value="repotted"> Repotted or moved rooms</label>
+                  <label><input type="radio" name="q-recent" value="draft"> Heating vent or AC active</label>
+                  <label><input type="radio" name="q-recent" value="none" checked> No recent changes</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diagnostic Results Box (Populated by troubleshoot.js) -->
+          <div class="diagnostic-results-box" id="diagnostic-results-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: "MY PLANTS" PERSISTENT COLLECTION (#my-plants-section) -->
+    <section class="section" id="my-plants-section" aria-labelledby="my-plants-heading">
+      <div class="container">
+        <header class="section-header">
+          <span class="badge-label">Personal Collection</span>
+          <h2 id="my-plants-heading">My Saved Houseplants</h2>
+          <p id="my-plants-section-count">
+            Your saved plants with custom notes. Saved directly in your browser's private local storage.
+          </p>
+        </header>
+
+        <div class="cards-grid-3" id="my-plants-section-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ACCESSIBLE CARE CARD DETAIL MODAL (FOCUS TRAP & PRINTABLE) -->
+  <div class="modal-overlay" id="care-card-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-plant-title">
+    <div class="modal-container">
+      <button class="modal-close-btn" type="button" aria-label="Close care card modal">
+        <i class="ph ph-x"></i>
+      </button>
+
+      <!-- Modal Hero with Plant Image & Names -->
+      <div class="modal-hero">
+        <img id="modal-plant-img" src="" alt="" loading="lazy">
+        <div class="modal-hero-overlay">
+          <div class="modal-hero-title">
+            <h2 id="modal-plant-title">Plant Common Name</h2>
+            <p id="modal-plant-botanical">Botanical Name (Family)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Body Content -->
+      <div class="modal-body">
+        <!-- Pet Safety Callout -->
+        <div id="modal-pet-callout" class="pet-safety-callout"></div>
+
+        <!-- Care Specifications Grid -->
+        <div class="care-specs-grid" id="modal-specs-grid"></div>
+
+        <!-- In-Depth Care Details -->
+        <div id="modal-care-details"></div>
+
+        <!-- Plant-Specific Troubleshooting Links -->
+        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border-subtle);">
+          <h4 style="font-size: 1.05rem; color: var(--color-primary); margin-bottom: 0.75rem;">
+            <i class="ph ph-first-aid-kit"></i> Common Watchpoints for this Species
+          </h4>
+          <div id="modal-problems-list"></div>
+        </div>
+
+        <!-- Modal Actions Footer -->
+        <div class="modal-actions-footer">
+          <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-primary btn-sm" id="modal-water-btn">
+              <i class="ph ph-drop"></i> Build Watering Schedule
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="modal-save-btn">
+              <i class="ph ph-heart"></i> Add to My Plants
+            </button>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()">
+            <i class="ph ph-printer"></i> Print Care Card
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER "MY PLANTS" DRAWER (TRIGGERED BY HEADER & BUTTONS) -->
+  <div class="my-plants-drawer-overlay" id="my-plants-drawer-overlay" aria-hidden="true"></div>
+  <aside class="my-plants-drawer" id="my-plants-drawer" aria-label="My Plants Collection Drawer" aria-hidden="true">
+    <div class="drawer-top-bar">
+      <div style="display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-size: 1.35rem; color: var(--color-primary); font-weight: 540;">
+        <i class="ph ph-heart-fill" style="color: var(--color-accent);"></i>
+        <span>My Plants</span>
+      </div>
+      <button class="drawer-close-btn" id="my-plants-drawer-close" type="button" aria-label="Close My Plants drawer">
+        <i class="ph ph-x"></i>
+      </button>
+    </div>
+
+    <div class="my-plants-list" id="my-plants-drawer-list"></div>
+
+    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--color-border); text-align: center;">
+      <small style="color: var(--color-text-light); font-size: 0.8rem;">
+        Collection persisted in browser storage. No login required.
+      </small>
+    </div>
+  </aside>
+
+  <!-- SITE FOOTER (Identical on all 4 pages) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="ph ph-plant" aria-hidden="true"></i>
+            <span>Fernly</span>
+          </a>
+          <p>
+            Cultivating thriving indoor ecosystems through scientific light analysis, transparent watering algorithms, and honest pet-safety guidance.
+          </p>
+          <div class="footer-social-links">
+            <a href="#" class="social-icon-btn" aria-label="Fernly on Instagram"><i class="ph ph-instagram-logo"></i></a>
+            <a href="#" class="social-icon-btn" aria-label="Fernly on Pinterest"><i class="ph ph-pinterest-logo"></i></a>
+            <a href="#" class="social-icon-btn" aria-label="Fernly RSS Feed"><i class="ph ph-rss"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore Tools</h4>
+          <ul class="footer-links-list">
+            <li><a href="plant-finder.html#finder">Plant Finder Engine</a></li>
+            <li><a href="plant-finder.html#watering-builder">Watering Calculator</a></li>
+            <li><a href="plant-finder.html#troubleshooter">Symptom Diagnostic</a></li>
+            <li><a href="plant-finder.html?pet=safe#finder">Pet-Safe Species</a></li>
+            <li><a href="plant-finder.html?light=low#finder">Low-Light Survivors</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul class="footer-links-list">
+            <li><a href="about.html">About &amp; Mission</a></li>
+            <li><a href="about.html#experts">Botanical Board</a></li>
+            <li><a href="about.html#method">Care Methodology</a></li>
+            <li><a href="services.html#workshops">Care Workshops</a></li>
+            <li><a href="contact.html">Contact Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-hours">
+          <h4>Editorial Oversight</h4>
+          <p><strong>Review Cycle:</strong> Bi-monthly review by horticultural specialists.</p>
+          <p><strong>Last Reviewed:</strong> October 2026</p>
+          <p><strong>Vet Advisory:</strong> Insoluble calcium oxalate &amp; saponin toxicity reviewed.</p>
+        </div>
+      </div>
+
+      <!-- Mandatory Disclosure Line -->
+      <div class="footer-disclosure-box">
+        <p class="footer-disclosure-text">
+          Fernly is a demo brand. Plant care guidance is general and may not suit every home; pet-safety notes are not veterinary advice. If you suspect your pet has ingested any plant material, please consult your local veterinarian or an emergency animal poison helpline immediately.
+        </p>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p class="footer-copyright">
+          &copy; 2026 Fernly. All rights reserved. Plain HTML/CSS/JS informational publication.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/myplants.js"></script>
+  <script src="assets/js/finder.js"></script>
+  <script src="assets/js/schedule.js"></script>
+  <script src="assets/js/troubleshoot.js"></script>
+</body>
+</html>

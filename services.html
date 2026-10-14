@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fernly Services — Tools, Workshops &amp; Plant Care</title>
+  <meta name="description" content="Explore Fernly's houseplant finder, custom watering schedule builder, virtual care workshops, plant diagnostic clinic, and expert consultation services.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23183c2e' d='M16 2C9 6 4 13 4 22c0 4 3 8 8 8 2 0 4-1 4-1s2 1 4 1c5 0 8-4 8-8 0-9-5-16-12-20z'/%3E%3Cpath fill='%233b664f' d='M16 4v24c-3-2-7-6-7-12 0-5 3-10 7-12z'/%3E%3C/svg%3E">
+
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/premium.css">
+</head>
+<body>
+  <!-- Skip link for WCAG Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- SITE HEADER / NAVBAR (Identical on all 4 pages) -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a href="index.html" class="brand-logo" aria-label="Fernly Home">
+        <i class="ph ph-plant" aria-hidden="true"></i>
+        <span>Fernly</span>
+        <span class="brand-badge">Guide</span>
+      </a>
+
+      <!-- Desktop Nav (>1024px) -->
+      <nav class="nav-menu" role="navigation" aria-label="Main Navigation">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About</a>
+        </li>
+        <li class="nav-item">
+          <a href="services.html" class="nav-link active" aria-current="page" aria-haspopup="true" aria-expanded="false">
+            Services <i class="ph ph-caret-down" style="font-size: 0.8rem;" aria-hidden="true"></i>
+          </a>
+          <ul class="nav-dropdown" role="menu">
+            <li role="none">
+              <a href="services.html#finder-overview" class="dropdown-link" role="menuitem">
+                <i class="ph ph-magnifying-glass" aria-hidden="true"></i> Plant Finder Tool
+              </a>
+            </li>
+            <li role="none">
+              <a href="services.html#watering" class="dropdown-link" role="menuitem">
+                <i class="ph ph-drop" aria-hidden="true"></i> Watering Schedule
+              </a>
+            </li>
+            <li role="none">
+              <a href="services.html#workshops" class="dropdown-link" role="menuitem">
+                <i class="ph ph-users-three" aria-hidden="true"></i> Care Workshops
+              </a>
+            </li>
+            <li role="none">
+              <a href="services.html#troubleshooting" class="dropdown-link" role="menuitem">
+                <i class="ph ph-first-aid-kit" aria-hidden="true"></i> Troubleshooting Help
+              </a>
+            </li>
+            <li role="none">
+              <a href="contact.html" class="dropdown-link" role="menuitem">
+                <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Contact
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="plant-finder.html" class="nav-link">Plant Finder</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">Contact</a>
+        </li>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <button class="my-plants-btn" type="button" aria-label="Open saved plant collection">
+          <i class="ph ph-heart" aria-hidden="true"></i>
+          <span>My Plants</span>
+          <span class="my-plants-badge" aria-label="0 plants saved">0</span>
+        </button>
+
+        <button class="hamburger-btn" id="hamburger-btn" type="button" aria-label="Open mobile navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE SLIDE-OVER DRAWER (<=1024px) -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay" aria-hidden="true"></div>
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="brand-logo">
+        <i class="ph ph-plant" aria-hidden="true"></i>
+        <span>Fernly</span>
+      </div>
+      <button class="drawer-close-btn" id="drawer-close-btn" type="button" aria-label="Close navigation menu">
+        <i class="ph ph-x" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <ul class="drawer-menu">
+      <li>
+        <a href="index.html" class="drawer-link">Home</a>
+      </li>
+      <li>
+        <a href="about.html" class="drawer-link">About</a>
+      </li>
+      <li>
+        <button class="drawer-accordion-btn" id="drawer-services-accordion" type="button" aria-expanded="false">
+          <span>Services</span>
+          <i class="ph ph-caret-down accordion-icon" aria-hidden="true"></i>
+        </button>
+        <div class="drawer-accordion-content" id="drawer-services-content">
+          <a href="services.html#finder-overview" class="drawer-sublink">
+            <i class="ph ph-magnifying-glass" aria-hidden="true"></i> Plant Finder Tool
+          </a>
+          <a href="services.html#watering" class="drawer-sublink">
+            <i class="ph ph-drop" aria-hidden="true"></i> Watering Schedule
+          </a>
+          <a href="services.html#workshops" class="drawer-sublink">
+            <i class="ph ph-users-three" aria-hidden="true"></i> Care Workshops
+          </a>
+          <a href="services.html#troubleshooting" class="drawer-sublink">
+            <i class="ph ph-first-aid-kit" aria-hidden="true"></i> Troubleshooting Help
+          </a>
+          <a href="contact.html" class="drawer-sublink">
+            <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Contact
+          </a>
+        </div>
+      </li>
+      <li>
+        <a href="plant-finder.html" class="drawer-link">Plant Finder</a>
+      </li>
+      <li>
+        <a href="contact.html" class="drawer-link">Contact</a>
+      </li>
+    </ul>
+
+    <div style="margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+      <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='plant-finder.html#finder';">
+        <i class="ph ph-magnifying-glass"></i> Explore Plant Finder
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main id="main-content">
+    <!-- PAGE TITLE HEADER -->
+    <section class="section page-hero" style="padding-bottom: 2rem;" aria-labelledby="services-main-heading">
+        <svg class="floating-leaf leaf-1" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M50 5 C75 25, 95 55, 75 90 C55 80, 45 60, 50 5 Z" fill="#3b664f" fill-opacity="0.2" />
+          <path d="M50 5 Q60 50 75 90" stroke="#3b664f" stroke-width="1.5" stroke-opacity="0.3" fill="none" />
+        </svg>
+        <svg class="floating-leaf leaf-2" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M20 80 C20 40, 50 10, 80 20 C70 50, 50 80, 20 80 Z" fill="#c46944" fill-opacity="0.15" />
+          <path d="M20 80 Q50 50 80 20" stroke="#c46944" stroke-width="1.5" stroke-opacity="0.25" fill="none" />
+        </svg>
+        <svg class="floating-leaf leaf-3" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M30 10 C60 15, 85 45, 70 85 C40 75, 20 50, 30 10 Z" fill="#183c2e" fill-opacity="0.18" />
+        </svg>
+        <svg class="floating-leaf leaf-4" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+      <div class="container">
+        <header class="section-header" style="margin-bottom: 1rem;">
+          <span class="badge-label">Informational Platform</span>
+          <h1 id="services-main-heading">Botanical Services, Tools &amp; Educational Programs</h1>
+          <p>
+            From algorithmic watering reminders to interactive live workshops and virtual clinics, explore how Fernly helps you maintain a resilient indoor greenhouse.
+          </p>
+        </header>
+      </div>
+    </section>
+
+    <!-- SECTION 1: PLANT FINDER TOOL OVERVIEW (#finder-overview) -->
+    <section class="section section-alt" id="finder-overview" aria-labelledby="finder-ov-heading">
+      <div class="container">
+        <div class="service-feature-row">
+          <div class="service-feature-media">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Philodendron_giganteum_-_Laeken_Royal_Greenhouses_-_Royal_Castle_of_Laeken_-_Brussels%2C_Belgium_-_DSC07236.jpg/1280px-Philodendron_giganteum_-_Laeken_Royal_Greenhouses_-_Royal_Castle_of_Laeken_-_Brussels%2C_Belgium_-_DSC07236.jpg" alt="Lush foliage arrangement representing the plant finder selection" loading="lazy">
+          </div>
+          <div class="service-feature-content">
+            <span class="badge-label">Signature Matching Tool</span>
+            <h2 id="finder-ov-heading">Multi-Parameter Plant Finder Engine</h2>
+            <p>
+              Match houseplants precisely to your living space without guessing. Our search tool computes multiple environmental constraints simultaneously so you never bring home a plant destined for low light failure.
+            </p>
+            <ul class="service-bullets">
+              <li>
+                <i class="ph ph-check-circle" aria-hidden="true"></i>
+                <span><strong>Photometric Light Filter:</strong> Narrow down species for dim north windows up to intense south-facing direct sunshine.</span>
+              </li>
+              <li>
+                <i class="ph ph-check-circle" aria-hidden="true"></i>
+                <span><strong>Space &amp; Placement:</strong> Sort by desk and bookshelf nooks, dining table surfaces, tall floor corners, or ceiling hangers.</span>
+              </li>
+              <li>
+                <i class="ph ph-check-circle" aria-hidden="true"></i>
+                <span><strong>Veterinary Pet Screening:</strong> Instantly isolate 100% non-toxic plants safe for dogs and curious cats.</span>
+              </li>
+              <li>
+                <i class="ph ph-check-circle" aria-hidden="true"></i>
+                <span><strong>Instant Care Cards:</strong> Launch accessible detail sheets featuring soil recipes, propagation nodes, and printable guides.</span>
+              </li>
+            </ul>
+            <a href="plant-finder.html#finder" class="btn btn-primary">
+              <i class="ph ph-magnifying-glass"></i> Open Plant Finder Tool
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: WATERING SCHEDULE BUILDER OVERVIEW (#watering) -->
+    <section class="section" id="watering" aria-labelledby="watering-ov-heading">
+      <div class="container">
+        <div class="service-feature-row reverse">
+          <div class="service-feature-media">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/A_young_girl_in_a_sweater_and_striped_pants_waters_potted_plants_with_a_blue_watering_can_next_to_an_outdoor_fountain.jpg/1280px-A_young_girl_in_a_sweater_and_striped_pants_waters_potted_plants_with_a_blue_watering_can_next_to_an_outdoor_fountain.jpg" alt="Watering potted plants with a watering can" loading="lazy">
+          </div>
+          <div class="service-feature-content">
+            <span class="badge-label">Algorithmic Precision</span>
+            <h2 id="watering-ov-heading">Dynamic Watering Schedule Calculator</h2>
+            <p>
+              Overwatering is the single most common cause of houseplant mortality. Our calculator replaces arbitrary calendars with a transparent formula factoring in vessel porosity, container volume, and seasonal daylight shifts.
+            </p>
+            <ul class="service-bullets">
+              <li>
+                <i class="ph ph-check-circle" aria-hidden="true"></i>
+                <span><strong>Pot Material Multipliers:</strong> Calculates faster transpiration through porous terracotta versus moisture-trapping glazed ceramic.</span>
+              </li>
+              <li>
+                <i class="ph ph-check-circle" aria-hidden="true"></i>
+                <span><strong>Seasonal Daylength Offsets:</strong> Extends hydration intervals automatically during winter rest to prevent root rot.</span>
+              </li>
+              <li>
+                <i class="ph ph-check-circle" aria-hidden="true"></i>
+                <span><strong>Exportable .ics Calendar Events:</strong> Download scheduled watering reminders directly to your Apple, Google, or Outlook calendar.</span>
+              </li>
+              <li>
+                <i class="ph ph-check-circle" aria-hidden="true"></i>
+                <span><strong>Tactile Soil Test Reminders:</strong> Always paired with our finger-depth test reminder before pouring.</span>
+              </li>
+            </ul>
+            <a href="plant-finder.html#watering-builder" class="btn btn-primary">
+              <i class="ph ph-drop"></i> Build Custom Watering Schedule
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: CARE WORKSHOPS (#workshops) -->
+    <section class="section section-alt" id="workshops" aria-labelledby="workshops-heading">
+      <div class="container">
+        <header class="section-header">
+          <span class="badge-label">Live Hands-On Learning</span>
+          <h2 id="workshops-heading">Interactive Horticultural Workshops</h2>
+          <p>Small-group virtual sessions led by conservatory horticulturists. Learn practical repotting techniques, propagation science, and winterizing tactics.</p>
+        </header>
+
+        <div class="cards-grid-3 workshop-grid">
+          <!-- Workshop 1 -->
+          <article class="card workshop-card">
+            <div class="workshop-media">
+              <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Monstera_deliciosa_-_Wilhelma_01.jpg/1280px-Monstera_deliciosa_-_Wilhelma_01.jpg" alt="Moss pole climbing Monstera repotting" loading="lazy">
+              <span class="workshop-date-badge">Saturday, Nov 14 &bull; 10:00 AM EST</span>
+            </div>
+            <div class="workshop-body">
+              <h3>Aroid Repotting &amp; Moss Pole Mastery</h3>
+              <div class="workshop-meta-row">
+                <span><i class="ph ph-clock"></i> 90 Mins</span>
+                <span><i class="ph ph-user"></i> Marcus Rivera</span>
+                <span><i class="ph ph-users"></i> 6 Seats Left</span>
+              </div>
+              <p>
+                Learn how to construct self-watering sphagnum moss poles, mix chunky aroid bark substrates, and safely untangle rootbound Monstera and Philodendron systems without root shock.
+              </p>
+              <button class="btn btn-primary reserve-workshop-btn" type="button" data-workshop-title="Aroid Repotting &amp; Moss Pole Mastery" data-workshop-date="Saturday, Nov 14, 2026">
+                Reserve a Seat
+              </button>
+            </div>
+          </article>
+
+          <!-- Workshop 2 -->
+          <article class="card workshop-card">
+            <div class="workshop-media">
+              <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Ficus_cuttings_with_roots_in_a_bottle%2C_White_background.jpg/1280px-Ficus_cuttings_with_roots_in_a_bottle%2C_White_background.jpg" alt="Glass vessels with water rooting vine cuttings" loading="lazy">
+              <span class="workshop-date-badge">Sunday, Nov 22 &bull; 2:00 PM EST</span>
+            </div>
+            <div class="workshop-body">
+              <h3>Propagation Clinic: Water, Sphagnum &amp; LECA</h3>
+              <div class="workshop-meta-row">
+                <span><i class="ph ph-clock"></i> 75 Mins</span>
+                <span><i class="ph ph-user"></i> Dr. Elena Vance</span>
+                <span><i class="ph ph-users"></i> 8 Seats Left</span>
+              </div>
+              <p>
+                Master the cellular biology of leaf nodes. Compare adventitious root development in tap water, perlite, moist sphagnum, and semi-hydroponic LECA clay balls.
+              </p>
+              <button class="btn btn-primary reserve-workshop-btn" type="button" data-workshop-title="Propagation Clinic: Water, Sphagnum &amp; LECA" data-workshop-date="Sunday, Nov 22, 2026">
+                Reserve a Seat
+              </button>
+            </div>
+          </article>
+
+          <!-- Workshop 3 -->
+          <article class="card workshop-card">
+            <div class="workshop-media">
+              <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Succulents_indoors_for_the_winter_%2815656300290%29.jpg/1280px-Succulents_indoors_for_the_winter_%2815656300290%29.jpg" alt="Succulents and houseplants on bright indoor sill" loading="lazy">
+              <span class="workshop-date-badge">Saturday, Dec 5 &bull; 11:00 AM EST</span>
+            </div>
+            <div class="workshop-body">
+              <h3>Winterizing Houseplants &amp; Radiator Defense</h3>
+              <div class="workshop-meta-row">
+                <span><i class="ph ph-clock"></i> 60 Mins</span>
+                <span><i class="ph ph-user"></i> Dr. Elena Vance</span>
+                <span><i class="ph ph-users"></i> 12 Seats Left</span>
+              </div>
+              <p>
+                Protect your indoor jungle from low winter solar angles, 20% relative humidity from heating vents, and cold drafts. Practical tactics to prevent seasonal leaf drop.
+              </p>
+              <button class="btn btn-primary reserve-workshop-btn" type="button" data-workshop-title="Winterizing Houseplants &amp; Radiator Defense" data-workshop-date="Saturday, Dec 5, 2026">
+                Reserve a Seat
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: TROUBLESHOOTING HELP & PLANT CLINIC (#troubleshooting) -->
+    <section class="section" id="troubleshooting" aria-labelledby="trouble-heading">
+      <div class="container">
+        <header class="section-header">
+          <span class="badge-label">Diagnostic Support</span>
+          <h2 id="trouble-heading">Plant Troubleshooting &amp; Virtual Consultations</h2>
+          <p>Whether you're fighting mysterious yellow leaves, powdery fungus, or spider mite webbing, we provide both instant self-serve diagnostics and 1-on-1 expert plant clinics.</p>
+        </header>
+
+        <div class="cards-grid-2">
+          <!-- Option 1: Self-Serve Interactive Tool -->
+          <article class="card" style="padding: 2.25rem;">
+            <div style="font-size: 2rem; color: var(--color-accent); margin-bottom: 1rem;">
+              <i class="ph ph-stethoscope"></i>
+            </div>
+            <h3 style="font-size: 1.45rem; margin-bottom: 0.5rem;">Free Interactive Diagnostic Tool</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1;">
+              Select from 9 common leaf symptoms (yellowing, brown tips, wilting, leaf drop, pests, root rot smell) and answer 3 quick environmental questions to receive ranked likely causes, step-by-step fixes, and repotting criteria.
+            </p>
+            <div style="background: var(--color-surface-tint); padding: 1rem; border-radius: var(--radius-inner); margin-bottom: 1.5rem; font-size: 0.85rem;">
+              <strong>Included:</strong> Ranked cause probabilities &bull; Actionable step-by-step remedies &bull; When to repot versus when to wait.
+            </div>
+            <a href="plant-finder.html#troubleshooter" class="btn btn-primary">
+              <i class="ph ph-magnifying-glass"></i> Launch Free Troubleshooter
+            </a>
+          </article>
+
+          <!-- Option 2: 1-on-1 Virtual Consult -->
+          <article class="card" style="padding: 2.25rem;">
+            <div style="font-size: 2rem; color: var(--color-secondary); margin-bottom: 1rem;">
+              <i class="ph ph-video-camera"></i>
+            </div>
+            <h3 style="font-size: 1.45rem; margin-bottom: 0.5rem;">Virtual Plant Clinic (30-Minute 1-on-1)</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1;">
+              Schedule a personalized video appointment with a credentialed horticulturist. Submit photos of your damaged foliage, roots, and window positioning for deep root-zone diagnosis and custom remediation plans.
+            </p>
+            <div style="background: var(--color-surface-soft); padding: 1rem; border-radius: var(--radius-inner); margin-bottom: 1.5rem; font-size: 0.85rem;">
+              <strong>Includes:</strong> High-definition video inspection &bull; Written care protocol PDF &bull; 14-day check-in email support.
+            </div>
+            <a href="#contact" class="btn btn-secondary">
+              <i class="ph ph-calendar-plus"></i> Inquire for Consultation
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: FREQUENTLY ASKED QUESTIONS (FAQ) -->
+    <section class="section section-alt" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <header class="section-header">
+          <span class="badge-label">Common Inquiries</span>
+          <h2 id="faq-heading">Frequently Asked Questions</h2>
+          <p>Straightforward answers regarding plant lighting, watering myths, pet toxins, and potting media.</p>
+        </header>
+
+        <div class="faq-list" role="region" aria-label="FAQ Accordion">
+          <!-- FAQ 1 -->
+          <div class="faq-item">
+            <button class="faq-question-btn" type="button" aria-expanded="false">
+              <span>Do houseplants genuinely purify indoor air as often claimed?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Scientific consensus indicates this claim is largely unproven in standard residential homes. While NASA's 1989 Clean Air Study demonstrated VOC reduction in small, hermetically sealed laboratory chambers, modern residential homes exchange outdoor air continuously. You would need roughly 10 to 100 plants per square meter to replicate NASA's sealed results. We appreciate houseplants for their psychological benefits, biophilic beauty, and humidity contribution—not for unrealistic air purification claims.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <button class="faq-question-btn" type="button" aria-expanded="false">
+              <span>Why do you factor pot material into the watering calculator?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Unglazed terracotta clay is naturally porous and breathable. Moisture evaporates through the vessel sidewalls as well as the soil surface, causing the root zone to dry roughly 25% to 30% faster than non-porous plastic or glazed ceramic. Failing to adjust your schedule for pot material is the leading culprit behind root rot in plastic containers and dehydration in clay pots.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <button class="faq-question-btn" type="button" aria-expanded="false">
+              <span>What should I do if my pet chews on a plant marked "Toxic to Pets"?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Immediately rinse your pet's mouth with clean water to flush out irritation-causing calcium oxalate needle crystals. Do not induce vomiting without professional instruction. Contact your local veterinary clinic or an established pet poison emergency helpline right away. Note the exact species name (use our botanical name) and approximately how much foliage was consumed.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <button class="faq-question-btn" type="button" aria-expanded="false">
+              <span>How do I determine if my plant needs repotting versus waiting?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Inspect the drainage holes at the bottom of the nursery container. If thick roots are coiling tightly around the base, pushing the root ball upward, or water flows straight through without absorbing, the plant is root-bound. The best time to repot is during early spring when active vegetative growth supports fast root recovery.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item">
+            <button class="faq-question-btn" type="button" aria-expanded="false">
+              <span>Should I fertilize my houseplants during the winter months?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                In general, no. As day lengths shorten in autumn and winter, plants enter semi-dormancy and dramatically slow cell division. Applying synthetic fertilizer during this period causes mineral salts to accumulate in the root zone without being consumed, which can chemically burn delicate root hairs. Resume fertilizing in spring once you notice active new shoots unfurling.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="faq-item">
+            <button class="faq-question-btn" type="button" aria-expanded="false">
+              <span>Can I save my personalized plant collection without creating an account?</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Yes! Fernly is an informational platform with zero account registration, passwords, or tracking. Your saved collection and personal plant notes are stored privately in your browser's local storage (localStorage) and will persist whenever you revisit from this device.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: CONTACT & CONSULTATION FORM SECTION (#contact) -->
+    <!-- Full validation, inline success message, Formspree/Netlify placeholder -->
+    <section class="section" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <header class="section-header">
+          <span class="badge-label">Get in Touch</span>
+          <h2 id="contact-heading">Contact the Fernly Editorial Team</h2>
+          <p>Have a question regarding species identification, workshop booking, or private botanical consultations? Send us a message below.</p>
+        </header>
+
+        <div class="contact-container">
+          <!-- Integration Placeholder Comment -->
+          <!-- Formspree / Netlify Forms Action Placeholder: action="https://formspree.io/f/placeholder" method="POST" -->
+          <form id="fernly-contact-form" novalidate aria-label="Contact and consultation inquiry form">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="contact-name" class="form-label">
+                  Your Full Name <span class="req" aria-hidden="true">*</span>
+                </label>
+                <input type="text" id="contact-name" class="form-input" placeholder="e.g., Alex Bennett" required>
+                <span class="form-error-msg" role="alert">Please enter your name (min 2 characters).</span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email" class="form-label">
+                  Email Address <span class="req" aria-hidden="true">*</span>
+                </label>
+                <input type="email" id="contact-email" class="form-input" placeholder="e.g., alex@example.com" required>
+                <span class="form-error-msg" role="alert">Please provide a valid email address.</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-topic" class="form-label">
+                Inquiry Topic <span class="req" aria-hidden="true">*</span>
+              </label>
+              <select id="contact-topic" class="form-select" required>
+                <option value="">-- Please select an inquiry category --</option>
+                <option value="workshop">Workshop Reservation or Private Group Session</option>
+                <option value="consultation">Virtual Plant Clinic (1-on-1 Consultation)</option>
+                <option value="botanical-question">Botanical Care Card Question / Correction</option>
+                <option value="pet-safety">Pet Safety / Veterinary Inquiry</option>
+                <option value="other">General Platform Feedback</option>
+              </select>
+              <span class="form-error-msg" role="alert">Please select an inquiry topic.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message" class="form-label">
+                Detailed Message <span class="req" aria-hidden="true">*</span>
+              </label>
+              <textarea id="contact-message" class="form-textarea" rows="5" placeholder="Describe your question, plant species, current lighting, or workshop interest..." required></textarea>
+              <span class="form-error-msg" role="alert">Please provide details (minimum 10 characters).</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-checkbox-label">
+                <input type="checkbox" id="contact-terms" required>
+                <span>
+                  I understand that Fernly provides general horticultural guidance and that pet-safety notes do not replace professional veterinary emergency care. <span class="req" aria-hidden="true">*</span>
+                </span>
+              </label>
+              <span class="form-error-msg" role="alert">You must acknowledge the general guidance terms before submitting.</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+              <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Submit Message
+            </button>
+
+            <!-- Inline Success Confirmation Alert (No page reload) -->
+            <div class="form-success-banner" id="contact-success" role="alert">
+              <div style="font-size: 1.5rem; margin-bottom: 0.35rem;">
+                <i class="ph ph-check-circle"></i>
+              </div>
+              <strong style="font-size: 1.05rem; display: block; margin-bottom: 0.25rem;">
+                Thank you for reaching out to Fernly!
+              </strong>
+              <p style="font-size: 0.9rem; margin: 0;">
+                Your message has been received by our editorial team. A botanical advisor will review your notes and reply to your email within 1–2 business days.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- WORKSHOP RESERVATION MODAL (ACCESSIBLE FOCUS TRAP) -->
+  <div class="modal-overlay" id="workshop-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="workshop-modal-title">
+    <div class="modal-container" style="max-width: 540px;">
+      <button class="modal-close-btn" type="button" aria-label="Close workshop reservation modal">
+        <i class="ph ph-x"></i>
+      </button>
+
+      <div style="padding: 2.25rem;">
+        <span class="badge-label" style="margin-bottom: 0.5rem;">Reserve Your Spot</span>
+        <h3 id="workshop-modal-title" style="margin-bottom: 0.25rem;">Botanical Workshop</h3>
+        <p id="workshop-modal-date" style="font-size: 0.88rem; color: var(--color-accent); font-weight: 600; margin-bottom: 1.5rem;">
+          Scheduled Date
+        </p>
+
+        <form id="workshop-reserve-form" novalidate>
+          <div class="form-group">
+            <label for="reserve-name" class="form-label">Your Name</label>
+            <input type="text" id="reserve-name" class="form-input" placeholder="Full name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="reserve-email" class="form-label">Email Address</label>
+            <input type="email" id="reserve-email" class="form-input" placeholder="Where to send video link" required>
+          </div>
+
+          <div class="form-group">
+            <label for="reserve-experience" class="form-label">Experience Level</label>
+            <select id="reserve-experience" class="form-select">
+              <option value="beginner">Beginner (1–3 plants)</option>
+              <option value="intermediate">Intermediate (4–15 plants)</option>
+              <option value="advanced">Advanced Collector (16+ plants)</option>
+            </select>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+            <button type="submit" class="btn btn-primary" style="flex: 1;">
+              Confirm Reservation (Demo)
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.FernlyUI.closeModal('workshop-modal')">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE FOOTER (Identical on all 4 pages) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <i class="ph ph-plant" aria-hidden="true"></i>
+            <span>Fernly</span>
+          </a>
+          <p>
+            Cultivating thriving indoor ecosystems through scientific light analysis, transparent watering algorithms, and honest pet-safety guidance.
+          </p>
+          <div class="footer-social-links">
+            <a href="#" class="social-icon-btn" aria-label="Fernly on Instagram"><i class="ph ph-instagram-logo"></i></a>
+            <a href="#" class="social-icon-btn" aria-label="Fernly on Pinterest"><i class="ph ph-pinterest-logo"></i></a>
+            <a href="#" class="social-icon-btn" aria-label="Fernly RSS Feed"><i class="ph ph-rss"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore Tools</h4>
+          <ul class="footer-links-list">
+            <li><a href="plant-finder.html#finder">Plant Finder Engine</a></li>
+            <li><a href="plant-finder.html#watering-builder">Watering Calculator</a></li>
+            <li><a href="plant-finder.html#troubleshooter">Symptom Diagnostic</a></li>
+            <li><a href="plant-finder.html?pet=safe#finder">Pet-Safe Species</a></li>
+            <li><a href="plant-finder.html?light=low#finder">Low-Light Survivors</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul class="footer-links-list">
+            <li><a href="about.html">About &amp; Mission</a></li>
+            <li><a href="about.html#experts">Botanical Board</a></li>
+            <li><a href="about.html#method">Care Methodology</a></li>
+            <li><a href="services.html#workshops">Care Workshops</a></li>
+            <li><a href="contact.html">Contact Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-hours">
+          <h4>Editorial Oversight</h4>
+          <p><strong>Review Cycle:</strong> Bi-monthly review by horticultural specialists.</p>
+          <p><strong>Last Reviewed:</strong> October 2026</p>
+          <p><strong>Vet Advisory:</strong> Insoluble calcium oxalate &amp; saponin toxicity reviewed.</p>
+        </div>
+      </div>
+
+      <!-- Mandatory Disclosure Line -->
+      <div class="footer-disclosure-box">
+        <p class="footer-disclosure-text">
+          Fernly is a demo brand. Plant care guidance is general and may not suit every home; pet-safety notes are not veterinary advice. If you suspect your pet has ingested any plant material, please consult your local veterinarian or an emergency animal poison helpline immediately.
+        </p>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p class="footer-copyright">
+          &copy; 2026 Fernly. All rights reserved. Plain HTML/CSS/JS informational publication.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/myplants.js"></script>
+</body>
+</html>
