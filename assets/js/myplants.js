@@ -9,6 +9,14 @@
 
   const STORAGE_KEY = 'fernly_saved_plants';
 
+  function setHeartIcon(btn, saved) {
+    const icon = btn.querySelector('i');
+    if (!icon) return;
+    icon.classList.toggle('ph-fill', saved);
+    icon.classList.toggle('ph', !saved);
+    icon.classList.add('ph-heart');
+  }
+
   window.FernlyMyPlants = {
     // Get array of saved plant records: [{ id, notes, addedAt }]
     getSavedPlants: function () {
@@ -81,9 +89,11 @@
         if (id) {
           if (this.isSaved(id)) {
             btn.classList.add('saved');
+            setHeartIcon(btn, true);
             btn.setAttribute('aria-label', 'Remove from My Plants');
           } else {
             btn.classList.remove('saved');
+            setHeartIcon(btn, false);
             btn.setAttribute('aria-label', 'Save to My Plants');
           }
         }

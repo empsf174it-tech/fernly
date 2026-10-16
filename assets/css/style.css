@@ -9,6 +9,7 @@
 
 /* --- PHOSPHOR ICONS FONT --- */
 @import url('https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css');
+@import url('https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css');
 
 /* ==========================================================================
    CSS CUSTOM PROPERTIES (DESIGN SYSTEM TOKENS)
@@ -1013,10 +1014,6 @@ p {
 .plant-favorite-btn.saved {
   background: #ffffff;
   color: var(--color-accent);
-}
-
-.plant-favorite-btn.saved i::before {
-  content: "\e24b"; /* ph-heart-fill */
 }
 
 /* Pet Safety Badge (Icon + Text, never color alone) */
@@ -3181,4 +3178,152 @@ p {
     justify-self: start;
     white-space: normal;
   }
+}
+
+/* Workshop cards: equal-height cards with CTA pinned to the bottom */
+.workshop-card {
+  display: flex;
+  flex-direction: column;
+}
+.workshop-body .reserve-workshop-btn {
+  margin-top: auto;
+  width: 100%;
+}
+
+/* Footer: left-aligned content on phones (≤576px) */
+@media (max-width: 576px) {
+  .footer-top-grid {
+    text-align: left;
+  }
+  .footer-brand .brand-logo {
+    justify-content: flex-start;
+  }
+  .footer-brand p,
+  .footer-social-links {
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: flex-start;
+  }
+  .footer-links-list {
+    align-items: flex-start;
+  }
+}
+
+
+/* Contact map */
+.contact-map-wrapper {
+  margin-top: 2rem;
+  border-radius: var(--radius-global);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-global);
+  line-height: 0;
+}
+.contact-map-wrapper iframe {
+  width: 100%;
+  height: 380px;
+  border: 0;
+}
+@media (max-width: 576px) {
+  .contact-map-wrapper iframe { height: 280px; }
+}
+
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-global);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  z-index: 900;
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover { filter: brightness(1.15); }
+@media print { .back-to-top { display: none !important; } }
+
+/* Mobile drawer "My Plants" CTA keeps the primary button look */
+.mobile-drawer .my-plants-btn.btn-primary {
+  background: linear-gradient(180deg, #1c4132 0%, var(--color-primary) 100%);
+  color: #ffffff;
+  justify-content: center;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  border: none;
+}
+
+/* Header "My Plants" CTA in primary color */
+.header-actions .my-plants-btn {
+  background: linear-gradient(180deg, #1c4132 0%, var(--color-primary) 100%);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+.header-actions .my-plants-btn:hover,
+.header-actions .my-plants-btn:focus-visible {
+  background: linear-gradient(180deg, #c99a6c 0%, var(--color-accent) 100%);
+  border-color: var(--color-accent);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -10px rgba(15, 42, 32, 0.55);
+}
+.header-actions .my-plants-btn:hover .my-plants-badge {
+  background: #ffffff;
+  color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+/* My Plants drawer: keep saved-plant cards inside the panel on mobile */
+.my-plants-drawer {
+  overflow-x: hidden;
+}
+@media (max-width: 576px) {
+  .my-plants-drawer { padding: 1.25rem; }
+}
+.saved-plant-card {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.saved-plant-thumb {
+  flex-shrink: 0;
+}
+.saved-plant-info {
+  min-width: 0;
+}
+.saved-plant-info h4,
+.saved-plant-botanical {
+  overflow-wrap: anywhere;
+}
+.saved-plant-notes {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.saved-plant-actions {
+  flex-wrap: wrap;
+}
+.saved-plant-actions .btn {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+}
+@media (max-width: 576px) {
+  .saved-plant-card { padding: 0.85rem; gap: 0.75rem; }
+  .saved-plant-thumb { width: 56px; height: 56px; }
 }

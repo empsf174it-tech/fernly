@@ -86,8 +86,29 @@
     }
   };
 
+  function initBackToTop() {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'back-to-top';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.innerHTML = '<i class="ph ph-arrow-up" aria-hidden="true"></i>';
+    document.body.appendChild(btn);
+
+    function toggle() {
+      btn.classList.toggle('visible', window.scrollY > 400);
+    }
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+
+    btn.addEventListener('click', function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initNavigation();
+    initBackToTop();
     initNewsletterForms();
     initContactForm();
     initWorkshopReserve();
@@ -207,6 +228,10 @@
     document.querySelectorAll('.my-plants-btn').forEach(btn => {
       btn.addEventListener('click', function (e) {
         e.preventDefault();
+        if (btn.closest('.mobile-drawer')) {
+          const closeBtn = document.getElementById('drawer-close-btn');
+          if (closeBtn) closeBtn.click();
+        }
         if (window.FernlyMyPlants && window.FernlyMyPlants.openDrawer) {
           window.FernlyMyPlants.openDrawer();
         } else {

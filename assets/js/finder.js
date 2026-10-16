@@ -265,7 +265,7 @@
           <div class="plant-card-media">
             <img src="${plant.image}" alt="${plant.altText}" loading="lazy">
             <button class="plant-favorite-btn ${isSaved ? 'saved' : ''}" data-plant-id="${plant.id}" aria-label="${isSaved ? 'Remove from My Plants' : 'Add to My Plants'}">
-              <i class="ph ph-heart"></i>
+              <i class="${isSaved ? 'ph-fill' : 'ph'} ph-heart"></i>
             </button>
           </div>
           <div class="plant-card-body">
